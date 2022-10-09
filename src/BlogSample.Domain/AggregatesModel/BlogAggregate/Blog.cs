@@ -1,8 +1,9 @@
 namespace BlogSample.Domain
 {
-    public class Blog: IAggregateRoot
+    public class Blog : Entity, IAggregateRoot
     {
 
+        public int Id { get; set; }
         public string Name { get; }
         public string Description { get; }
         private readonly List<Post> _posts;
@@ -27,7 +28,7 @@ namespace BlogSample.Domain
 
         public void AddPost(string content, DateTime createDate)
         {
-            Post post = Post.AddPost(content, createDate); 
+            Post post = Post.AddPost(content, createDate);
             _posts.Add(post);
         }
     }

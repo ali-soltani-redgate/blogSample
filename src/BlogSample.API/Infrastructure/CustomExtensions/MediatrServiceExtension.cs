@@ -2,7 +2,7 @@
 using BlogSample.ApplicationService;
 using MediatR;
 
-namespace BlogSample.API
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MediatrServiceExtension
     {

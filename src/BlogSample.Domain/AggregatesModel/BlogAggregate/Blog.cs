@@ -17,6 +17,11 @@ namespace BlogSample.Domain
             _posts = new List<Post>();
         }
 
+        public Blog()
+        {
+            
+        }
+
         public static Blog Add(string name, string description)
         {
             if (string.IsNullOrWhiteSpace(name))

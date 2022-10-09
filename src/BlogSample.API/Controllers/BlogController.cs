@@ -21,18 +21,29 @@ namespace BlogSample.API
          public async Task<IActionResult> AddApplicant([FromBody] AddBlogCommand addBlogCommand)
         {
             var blogId = await _mediator.Send(addBlogCommand);
-            return CreatedAtRoute(nameof(GetApplicant), new { id = blogId }, new { blogId });
+            return CreatedAtRoute(nameof(GetBlog), new { id = blogId }, new { blogId });
         }
 
-        [HttpGet("{id:int}", Name = nameof(GetApplicant))]
+        [HttpGet("{id:int}", Name = nameof(GetBlog))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Blog))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Blog>> GetApplicant(int id)
+        public async Task<ActionResult<Blog>> GetBlog(int id)
         {
-            // var applicant = await _mediator.Send(new GetApplicantQuery() { ApplicantId = id });
-            // if (applicant == null)
-            //     return NotFound(new { Message = $"Applicant with id {id} not found." });
+            var blog = await _mediator.Send(new GetBlogQuery() { BlogId = id });
+            if (blog == null)
+                return NotFound(new { Message = $"Blog with id {id} not found." });
+            return Ok();
+        }
+
+
+        [HttpPost("addPost")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddPost([FromBody] AddPostCommand addPostCommand)
+        {
+            var blogId = await _mediator.Send(addPostCommand);
+            //return CreatedAtRoute(nameof(GetBlog), new { id = blogId }, new { blogId });
             return Ok();
         }
 

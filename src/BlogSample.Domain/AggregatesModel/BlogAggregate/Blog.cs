@@ -19,7 +19,7 @@ namespace BlogSample.Domain
 
         public Blog()
         {
-            
+            _posts = new List<Post>();
         }
 
         public static Blog Add(string name, string description)

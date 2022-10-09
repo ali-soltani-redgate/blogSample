@@ -18,5 +18,11 @@ namespace BlogSample.Infrastructure
         {
            return  (await _bloggingContext.Blogs.AddAsync(blog)).Entity;
         }
+
+        public async Task<Blog> Get(int blogId) => await _bloggingContext.Blogs.FirstOrDefaultAsync(b => b.Id == blogId);
+
+         public void Update(Blog blog) => 
+            _bloggingContext.Entry(blog).State = EntityState.Modified;
+
     }
 }
